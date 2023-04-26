@@ -1,0 +1,40 @@
+.container-xxxl {
+  padding: 15px 5%;
+  background-color: #4d877391;
+  align-items: center;
+}
+
+#name {
+  font-weight: bold;
+  margin-top: 20px;
+  align-self: center;
+}
+
+@media (min-width: 576px) {
+  .about-me {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .about-me {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 992px) {
+.about-me {
+    width: 89%;
+  }
+}
+
+.img {
+  align-self: center;
+}
+
+span {
+  padding: 20px;
+}
+
+/* Palette: #4d877391 - #7fffd4a1 - #7fffd47d  */
