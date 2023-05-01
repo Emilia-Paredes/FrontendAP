@@ -1,19 +1,16 @@
 <div class="container-xxxl">
   <h2>Educación</h2>
   <div class="col-lg-11">
-    <ul>
-      <li>
-        <h3>Estudio 1</h3> - <h4>(años)</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, perspiciatis. Voluptatem dignissimos, dolorem earum, odit qui, aliquid consectetur ullam repudiandae minima mollitia officia quae laborum?</p>
-      </li>
-      <li>
-        <h3>Estudio 2</h3> - <h4>(años)</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, perspiciatis. Voluptatem dignissimos, dolorem earum, odit qui, aliquid consectetur ullam repudiandae minima mollitia officia quae laborum?</p>
-      </li>
-      <li>
-        <h3>Estudio 3</h3> - <h4>(años)</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, perspiciatis. Voluptatem dignissimos, dolorem earum, odit qui, aliquid consectetur ullam repudiandae minima mollitia officia quae laborum?</p>
-      </li>
-    </ul>
+    <div class="row" *ngFor="let education of educations">
+      <div>
+        <h3>{{education.nombreEdu}}</h3> - <h4>{{education.duracionEdu}}</h4>
+        <div>
+          <b> Institución: {{education.institucion}} </b>
+        </div>
+        <p>{{education.descripcionEdu}}</p>
+        <div>
+          <img src="{{education.imageEdu}}" alt="">
+        </div>
+      </div>
   </div>
 </div>

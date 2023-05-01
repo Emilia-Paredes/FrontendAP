@@ -3,7 +3,7 @@ import { Persona } from 'src/app/model/person.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from 'src/app/service/person.service';
-import { TokenService } from 'src/app/service/token.service';
+// import { TokenService } from 'src/app/service/token.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +16,7 @@ export class AboutComponent implements OnInit {
   public editarPersona: Persona | undefined;
   isAdmin: boolean = false;
 
-  constructor(private personService: PersonService, private tokenService: TokenService) { }
+  constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
     this.getPersona();
