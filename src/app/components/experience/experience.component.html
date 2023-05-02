@@ -2,15 +2,12 @@
   <h2>Experiencia</h2>
   <div class="col-lg-11">
     <div class="row" *ngFor="let experience of experiences">
-      <div>
+      <div class="col-sm-9">
         <h3>{{experience.nombreExp}}</h3> - <h4>{{experience.duracionExp}}</h4>
-        <div>
-          <!-- <b> Institución: {{experience.institucion}} </b> -->
-        </div>
-        <aside>
-          <img src="{{experience.imageExp}}" alt="">
-        </aside>
         <p>{{experience.descripcionExp}}</p>
+      </div>
+      <div class="col-sm-1">
+        <img src="{{experience.imageExp}}" width="180" alt="">
       </div>
   </div>
 </div>

@@ -12,7 +12,7 @@ import { ExperienceComponent } from './components/experience/experience.componen
 import { EducationComponent } from './components/education/education.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ProyectsComponent } from './components/proyects/proyects.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -27,7 +27,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     EducationComponent,
     SkillsComponent,
     FooterComponent,
-    ProyectsComponent,
+    ProjectsComponent,
     HomeComponent,
     LoginComponent
   ],

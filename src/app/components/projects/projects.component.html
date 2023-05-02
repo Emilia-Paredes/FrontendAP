@@ -1,0 +1,9 @@
+<div class="container-xxxl">
+  <h2 class="col-sm-12 col-md-7 col-lg-7 parte1">Proyectos</h2>
+  <div class="contenedor">
+    <div class="col-sm-12 col-md-7 col-lg-7 parte1" *ngFor="let project of projects">
+      <h3>{{project.nombreProy}}</h3>
+      <p>{{project.descripcionProy}}</p>
+      <img src="{{project.imageProy}}" class="img-fluid">
+  </div>
+</div>

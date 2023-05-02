@@ -2,15 +2,15 @@
   <h2>Educación</h2>
   <div class="col-lg-11">
     <div class="row" *ngFor="let education of educations">
-      <div>
+      <div class="col-sm-9">
         <h3>{{education.nombreEdu}}</h3> - <h4>{{education.duracionEdu}}</h4>
         <div>
           <b> Institución: {{education.institucion}} </b>
         </div>
         <p>{{education.descripcionEdu}}</p>
-        <div>
-          <img src="{{education.imageEdu}}" alt="">
-        </div>
+      </div>
+      <div class="col-sm-1">
+        <img src="{{education.imageEdu}}" width="180" alt="">
       </div>
   </div>
 </div>

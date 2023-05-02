@@ -18,16 +18,16 @@ export class SkillsComponent implements OnInit {
   ngOnInit(): void {
     this.getSkills();
 
-    if(this.tokenService.getToken()) {
+    if (this.tokenService.getToken()) {
       this.isLogged = true;
     } else {
       this.isLogged = false;
     }
   }
 
-  getSkills(): void{
+  getSkills(): void {
     this.skillService.getSkill().subscribe(
-      data => {this.skills = data;})
+      data => { this.skills = data; })
   }
 
 }
