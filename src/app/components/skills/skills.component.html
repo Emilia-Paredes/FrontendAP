@@ -2,7 +2,7 @@
   <div *ngFor="let skill of skills">
     <circle-progress
       [percent]="(skill.percentage)"
-      [radius]="100"
+      [radius]="100" [imageSrc]="''"
       [title]="(skill.skill)"
       [outerStrokeWidth]="16"
       [innerStrokeWidth]="8"
