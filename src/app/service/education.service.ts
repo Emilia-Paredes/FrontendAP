@@ -10,21 +10,25 @@ import { Education } from '../model/education.model';
 export class EducationService {
   private apiServerUrl = environment.apiBaseUrl + '/educacion';
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   public getEducation(): Observable<Education[]> {
-    return this.http.get<Education[]>(`${this.apiServerUrl}/lista`);
+    return this.httpClient.get<Education[]>(`${this.apiServerUrl}/lista`);
   }
 
   public addEducation(educacion: Education): Observable<Education> {
-    return this.http.post<Education>(`${this.apiServerUrl}/agregar`,educacion);
+    return this.httpClient.post<Education>(`${this.apiServerUrl}/create`, educacion);
   }
 
-  public updateEducation(educacion: Education): Observable<Education> {
-    return this.http.put<Education>(`${this.apiServerUrl}/editar`,educacion);
+  // public updateEducation(educacionId: number): Observable<Education> {
+  //   return this.http.put<Education>(`${this.apiServerUrl}/update/${educationId}`);
+  // }
+
+  public updateEducation(id: number, educacion: Education): Observable<any> {
+    return this.httpClient.put<any>(`${this.apiServerUrl}/update/${id}`, educacion);
   }
 
   public deleteEducation(educationId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/borrar/${educationId}`);
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/delete/${educationId}`);
   }
 }

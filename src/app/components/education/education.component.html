@@ -1,77 +1,75 @@
+<div class="text-center">
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEducationModal" 
+  (click)="onOpenModal('add')" style="color:aliceblue"> Añadir Educación </button>
+</div>
 
-<div class="container-xxxl">
-  <div>
-    <div class="text-center">
-      <button type="button" class="btn btn-success" (click)="onOpenModal('add')">
-        <a class="nav-link" style="color:aliceblue">
-          Añadir Educación
-          <span class="sr-only"> (current) </span>
-        </a>
-      </button>
+<div class="container-xxxl main-container">
+<h2>Educación</h2>
+<div class="col-lg-11">
+  <div class="row" *ngFor="let education of educations">
+    <div class="col-sm-9">
+      <h3>{{education.nombreEdu}}</h3> - <h4>{{education.duracionEdu}}</h4>
+      <div>
+        <b> Institución: {{education.institucion}} </b>
+      </div>
+      <p>{{education.descripcionEdu}}</p>
+    </div>
+    <div class="col-sm-1">
+      <img src="{{education.imageEdu}}" width="180" alt="">
+    </div>
+
+    <div class="col" style="text-align: end;">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editEducationModal" 
+      (click)="onOpenModal('edit', education)" style="color:aliceblue"><i class="fa fa-pencil"></i></button>
+      <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editEducationModal" (click)="onOpenModal('edit', education)">Haz clic</button> -->
+      <!-- <button (click)="onOpenModal('edit', education)" class="btn btn-primary tooltips" data-placement="top"
+        data-toggle="tooltip" data-original-title="Edit" data-bs-target="#editEducationModal">
+      </button> -->
+      <a (click)="onOpenModal('delete', education)" class="btn btn-primary tooltips" data-placement="top"
+        data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i>
+      </a>
     </div>
   </div>
-  <h2>Educación</h2>
-  <div class="col-lg-11">
-    <div class="row" *ngFor="let education of educations">
-      <div class="col-sm-9">
-        <h3>{{education.nombreEdu}}</h3> - <h4>{{education.duracionEdu}}</h4>
-        <div>
-          <b> Institución: {{education.institucion}} </b>
-        </div>
-        <p>{{education.descripcionEdu}}</p>
-      </div>
-      <div class="col-sm-1">
-        <img src="{{education.imageEdu}}" width="180" alt="">
-      </div>
+</div>
+</div>
 
-      <div class="col" style="text-align: end;">
-        <a (click)="onOpenModal('edit', education)" class="btn btn-primary tooltips" data-placement="top"
-          data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i>
-        </a>
-        <a (click)="onOpenModal('delete', education)" class="btn btn-primary tooltips" data-placement="top"
-          data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i>
-        </a>
-      </div>
-    </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="addEducationModal" tabindex="-1" role="dialog" aria-labelledby="addEducationModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Modal -->
+<div class="modal fade" id="addEducationModal" tabindex="-1" role="dialog" aria-labelledby="addEducationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addEducationModalLabel">Añadir Educación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="close">
-          <span aria-hidden="true">&times</span>
-        </button>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> &times; </button>
       </div>
       <div class="modal-body">
         <form #addForm="ngForm" (ngSubmit)="onAddEducation(addForm)">
           <div class="form-group">
-            <label for="tituloEdu">Título</label>
-            <input type="text" ngModel name="tituloEdu" class="form-control" id="tituloEdu" 
-            placeholder="Titulo" required>
+            <label for="nombreEdu">Título</label>
+            <input type="text" ngModel name="nombreEdu" class="form-control" id="nombreEdu" placeholder="Titulo"
+              required>
           </div>
           <div class="form-group">
             <label for="duracionEdu">Duración</label>
-            <input type="text" ngModel name="duracionEdu" class="form-control" id="duracionEdu" 
-            placeholder="Duracion" required>
+            <input type="text" ngModel name="duracionEdu" class="form-control" id="duracionEdu" placeholder="Duracion"
+              required>
           </div>
           <div class="form-group">
             <label for="descripcionEdu">Descripción</label>
-            <input type="text" ngModel name="descripcionEdu" class="form-control" id="descripcionEdu" 
-            placeholder="Descripcion" required>
+            <input type="text" ngModel name="descripcionEdu" class="form-control" id="descripcionEdu"
+              placeholder="Descripcion" required>
           </div>
           <div class="form-group">
             <label for="imageEdu">Imagen</label>
-            <input type="text" ngModel name="imageEdu" class="form-control" id="imageEdu" 
-            placeholder="Imagen" required>
+            <input type="text" ngModel name="imageEdu" class="form-control" id="imageEdu" placeholder="Imagen">
           </div>
           <div class="modal-footer">
-            <button type="button" id="add-education-form" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" id="add-education-form" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Añadir cambios</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+</div>

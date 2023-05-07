@@ -36,21 +36,21 @@ export class EducationComponent implements OnInit {
   }
 
   public onOpenModal(mode: String, education?: Education): void {
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addEducationModal');
-    } else if (mode === 'delete') {
-      this.deleteEducation = education;
-      button.setAttribute('data-target', '#deleteEducationModal');
-    } else if (mode === 'edit') {
-      this.editEducation = education;
-      button.setAttribute('data-target', '#editEducationModal');
-    }
-    container?.appendChild(button);
-    button.click();
+  const container = document.getElementById('main-container');
+  const button = document.createElement('button');
+  button.style.display = 'none';
+  button.setAttribute('data-toggle', 'modal');
+  if (mode === 'add') {
+    button.setAttribute('data-target', '#addEducationModal');
+  } else if (mode === 'delete') {
+    this.deleteEducation = education;
+    button.setAttribute('data-target', '#deleteEducationModal');
+  } else if (mode === 'edit') {
+    this.editEducation = education;
+    button.setAttribute('data-target', '#editEducationModal');
+  }
+  container?.appendChild(button);
+  button.click();
   }
 
   public onAddEducation(addForm: NgForm) {
@@ -68,10 +68,10 @@ export class EducationComponent implements OnInit {
     })
   }
 
-  public onUpdateEducation(education: Education) {
+  public onUpdateEducation(id: number, education: Education): void {
     this.updateEducation = education;
     document.getElementById('add-education-form')?.click();
-    this.educationService.updateEducation(education).subscribe({
+    this.educationService.updateEducation(id, this.updateEducation).subscribe({
       next: (response: Education) => {
         console.log(response);
         this.getEducations();
