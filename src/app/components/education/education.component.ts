@@ -15,8 +15,8 @@ export class EducationComponent implements OnInit {
 
   public educations: Education[] = [];
   public editEducation: Education | undefined;
-  public deleteEducation: Education | undefined;
   public updateEducation: Education | undefined;
+  public deleteEducation: Education | undefined;
 
   constructor(private educationService: EducationService) { }
 
@@ -68,10 +68,10 @@ export class EducationComponent implements OnInit {
     })
   }
 
-  public onUpdateEducation(id: number, education: Education): void {
+  public onUpdateEducation(education: Education) {
     this.updateEducation = education;
     document.getElementById('add-education-form')?.click();
-    this.educationService.updateEducation(id, this.updateEducation).subscribe({
+    this.educationService.updateEducation(education).subscribe({
       next: (response: Education) => {
         console.log(response);
         this.getEducations();
@@ -82,9 +82,8 @@ export class EducationComponent implements OnInit {
     })
   }
 
-  public onDeleteEducation(id: number): void {
-
-    this.educationService.deleteEducation(id).subscribe({
+  public onDeleteEducation(idEdu: number): void {
+    this.educationService.deleteEducation(idEdu).subscribe({
       next: (response: void) => {
         console.log(response);
         this.getEducations();

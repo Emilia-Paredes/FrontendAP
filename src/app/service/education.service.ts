@@ -20,13 +20,13 @@ export class EducationService {
     return this.httpClient.post<Education>(`${this.apiServerUrl}/create`, educacion);
   }
 
-  // public updateEducation(educacionId: number): Observable<Education> {
-  //   return this.http.put<Education>(`${this.apiServerUrl}/update/${educationId}`);
-  // }
-
-  public updateEducation(id: number, educacion: Education): Observable<any> {
-    return this.httpClient.put<any>(`${this.apiServerUrl}/update/${id}`, educacion);
+  public updateEducation(educacion: Education): Observable<Education> {
+    return this.httpClient.put<Education>(`${this.apiServerUrl}/update`, educacion);
   }
+
+  // public updateEducation(id: number, educacion: Education): Observable<any> {
+  //   return this.httpClient.put<any>(`${this.apiServerUrl}/update/${id}`, educacion);
+  // }
 
   public deleteEducation(educationId: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiServerUrl}/delete/${educationId}`);
