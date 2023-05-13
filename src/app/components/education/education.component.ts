@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Education } from 'src/app/model/education.model';
 import { EducationService } from 'src/app/service/education.service';
-
-
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-education',
@@ -14,14 +13,22 @@ import { EducationService } from 'src/app/service/education.service';
 export class EducationComponent implements OnInit {
 
   public educations: Education[] = [];
-  public editEducation: Education | undefined;
   public updateEducation: Education | undefined;
   public deleteEducation: Education | undefined;
+  // rol: string[];
+  rol: string[] = [];
+  isLogged = false;
+  // isAdmin: boolean = false;
 
-  constructor(private educationService: EducationService) { }
+  constructor(private educationService: EducationService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.getEducations();
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   public getEducations(): void {
@@ -36,21 +43,21 @@ export class EducationComponent implements OnInit {
   }
 
   public onOpenModal(mode: String, education?: Education): void {
-  const container = document.getElementById('main-container');
-  const button = document.createElement('button');
-  button.style.display = 'none';
-  button.setAttribute('data-toggle', 'modal');
-  if (mode === 'add') {
-    button.setAttribute('data-target', '#addEducationModal');
-  } else if (mode === 'delete') {
-    this.deleteEducation = education;
-    button.setAttribute('data-target', '#deleteEducationModal');
-  } else if (mode === 'edit') {
-    this.editEducation = education;
-    button.setAttribute('data-target', '#editEducationModal');
-  }
-  container?.appendChild(button);
-  button.click();
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addEducationModal');
+    } else if (mode === 'delete') {
+      this.deleteEducation = education;
+      button.setAttribute('data-target', '#deleteEducationModal');
+    } else if (mode === 'edit') {
+      this.updateEducation = education;
+      button.setAttribute('data-target', '#updateEducationModal');
+    }
+    container?.appendChild(button);
+    button.click();
   }
 
   public onAddEducation(addForm: NgForm) {
@@ -68,10 +75,10 @@ export class EducationComponent implements OnInit {
     })
   }
 
-  public onUpdateEducation(education: Education) {
-    this.updateEducation = education;
-    document.getElementById('add-education-form')?.click();
-    this.educationService.updateEducation(education).subscribe({
+  public onUpdateEducation(education: Education): void {
+    if(!education.id) return console.log('No existe el ID')
+    let id = education.id;
+    this.educationService.updateEducation(id, education).subscribe({
       next: (response: Education) => {
         console.log(response);
         this.getEducations();
