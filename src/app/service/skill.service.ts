@@ -11,7 +11,6 @@ import { Skill } from 'src/app/model/skill.model'
 export class SkillService {
   private apiServerUrl = environment.apiBaseUrl + '/skill';
 
-
   constructor(private httpClient: HttpClient) { }
 
   public getSkill(): Observable<Skill[]> {
@@ -19,10 +18,10 @@ export class SkillService {
   }
 
   public detailSkill(id: number): Observable<Skill> {
-    return this.httpClient.get<Skill>(`${this.apiServerUrl}/editar/${id}`);
+    return this.httpClient.get<Skill>(`${this.apiServerUrl}/buscar/${id}`);
   }
 
-  public saveSkill(skill: Skill): Observable<any> {
+  public addSkill(skill: Skill): Observable<any> {
     return this.httpClient.post<any>(`${this.apiServerUrl}/crear`, skill);
   }
 

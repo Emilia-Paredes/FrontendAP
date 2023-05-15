@@ -4,6 +4,7 @@
     <button *ngIf="isLogged" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEducationModal"
       (click)="onOpenModal('add')" style="color:aliceblue"> Añadir Educación </button>
   </div>
+  
   <div class="row" *ngFor="let education of educations">
     <div class="col-sm-2">
       <img src="{{education.imageEdu}}" width="180" alt="">

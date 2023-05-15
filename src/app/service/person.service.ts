@@ -12,24 +12,23 @@ export class PersonService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // public verPersonas(): Observable<Persona> {
-  //   return this.http.get<Persona>(`${this.apiServerUrl}/ver`);
-  // }
-
-  // __________________
-  public getPersona(): Observable<Persona> {
-    return this.httpClient.get<Persona>(`${this.apiServerUrl}/buscar/2`);
+  public getPersonas(): Observable<Persona[]> {
+    return this.httpClient.get<Persona[]>(`${this.apiServerUrl}/lista`);
   }
 
-  // public updatePersona(persona: Persona): Observable<Persona> {
-  //   return this.http.put<Persona>(`${this.apiServerUrl}/editar`, persona);
-  // } 
+  public detailPersona(id: number): Observable<Persona> {
+    return this.httpClient.get<Persona>(`${this.apiServerUrl}/buscar/${id}`);
+  }
 
-  // public addPersona(persona: Persona): Observable<Persona> {
-  //   return this.http.post<Persona>(`${this.apiServerUrl}/persona/add`, persona);
-  // }
-
-  // public deletePersona(id: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiServerUrl}/persona/delete/${id}`);
-  // }
+  public addPersona(persona: Persona): Observable<Persona> {
+    return this.httpClient.post<Persona>(`${this.apiServerUrl}/crear`, persona);
+  }
+  
+  public updatePersona(persona: Persona): Observable<Persona> {
+    return this.httpClient.put<Persona>(`${this.apiServerUrl}/editar`, persona);
+  }
+  
+  public deletePersona(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/persona/eliminar/${id}`);
+  }
 }

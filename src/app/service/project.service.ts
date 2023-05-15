@@ -17,10 +17,10 @@ export class ProjectService {
   }
 
   public detailProject(id: number): Observable<Project> {
-    return this.httpClient.get<Project>(`${this.apiServerUrl}/editar/${id}`);
+    return this.httpClient.get<Project>(`${this.apiServerUrl}/buscar/${id}`);
   }
 
-  public saveProject(project: Project): Observable<any> {
+  public addProject(project: Project): Observable<any> {
     return this.httpClient.post<any>(`${this.apiServerUrl}/crear`, project);
   }
 

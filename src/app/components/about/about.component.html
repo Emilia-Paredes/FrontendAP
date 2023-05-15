@@ -1,5 +1,9 @@
-<div class="container-xxxl" *ngIf="persona">
-  <div class="row">
+<div class="container-xxxl" *ngIf="personas">
+  <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
+    data-bs-target="#addPersonModal" (click)="onOpenModal('add')" style="color:aliceblue">
+    <i class="fa fa-pencil"></i>
+  </button>
+  <div class="row" *ngFor="let persona of personas">
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 img">
       <img src="{{persona.url_imagen}}" class="img-fluid">
     </div>
@@ -12,6 +16,132 @@
         <h3>Acerca de mí</h3>
         <p>{{persona.sobremi}}</p>
       </span>
+    </div>
+
+    <div class="col-sm-2" style="text-align: end;">
+      <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePersonModal"
+        (click)="onOpenModal('edit', persona)" style="color:aliceblue"><i class="fa fa-pencil"></i></button>
+      <button *ngIf="isLogged" (click)="onOpenModal('delete', persona)" class="btn btn-primary tooltips" data-placement="top"
+        data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal" data-bs-target="#deletePersonModal"><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="addPersonModal" tabindex="-1" role="dialog" aria-labelledby="addPersonModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPersonModallLabel">Añadir Persona</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> &times; </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddPerson(addForm)">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" ngModel name="apellido" class="form-control" id="apellido" placeholder="Apellido"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" ngModel name="ocupacion" class="form-control" id="ocupacion"
+              placeholder="Ocupación" required>
+          </div>
+          <div class="form-group">
+            <label for="sobremi">Sobre mi</label>
+            <input type="text" ngModel name="sobremi" class="form-control" id="sobremi"
+              placeholder="Sobre mi" required>
+          </div>
+          <div class="form-group">
+            <label for="url_imagen">Imagen</label>
+            <input type="text" ngModel name="url_imagen" class="form-control" id="url_imagen" placeholder="Imagen">
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-persona-form" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cerrar</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Añadir cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updatePersonaModal" tabindex="-1" role="dialog" aria-labelledby="updatePersonaModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updatePersonaModalLabel">Editar Persona</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> &times; </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm" (ngSubmit)="onUpdatePerson(editForm.value)">
+          <div class="form-group">
+            <label for="nombre">Título</label>
+            <input type="text" ngModel="{{updatePerson?.nombre}}" name="nombre" class="form-control"
+              id="nombre" placeholder="Titulo" required>
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" ngModel="{{updatePerson?.apellido}}" name="apellido" class="form-control"
+              id="apellido" placeholder="Apellido" required>
+          </div>
+          <div class="form-group">
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" ngModel="{{updatePerson?.ocupacion}}" name="ocupacion" class="form-control" id="ocupacion"
+              placeholder="Ocupación" required>
+          </div>
+          <div class="form-group">
+            <label for="sobremi">Sobre mi</label>
+            <input type="text" ngModel="{{updatePerson?.sobremi}}" name="sobremi" class="form-control"
+              id="sobremi" placeholder="Sobre mi" required>
+          </div>
+          <div class="form-group">
+            <label for="url_imagen">Imagen</label>
+            <input type="text" ngModel="{{updatePerson?.url_imagen}}" name="url_imagen" class="form-control" id="url_imagen"
+              placeholder="Imagen">
+          </div>
+          <div>
+            <input type="hidden" name="id" ngModel="{{updatePerson?.id}}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="update-persona-form" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button (click)="onUpdatePerson(editForm.value)" [disabled]="editForm.invalid" type="submit"
+              class="btn btn-primary" data-bs-dismiss="modal">Añadir cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deletePersonModal" tabindex="-1" role="dialog" aria-labelledby="deletePersonModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePersonModalLabel">Borrar Persona</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Esta acción eliminará "{{deletePerson?.nombre}}". ¿Desea continuar?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-bs-dismiss="modal">No</button>
+        <button (click)="deletePerson && deletePerson.id !== undefined && onDeletePerson(deletePerson.id)"
+          type="button" class="btn" data-bs-dismiss="modal">Sí</button>
+      </div>
     </div>
   </div>
 </div>

@@ -15,15 +15,14 @@ export class EducationComponent implements OnInit {
   public educations: Education[] = [];
   public updateEducation: Education | undefined;
   public deleteEducation: Education | undefined;
-  // rol: string[];
   rol: string[] = [];
   isLogged = false;
-  // isAdmin: boolean = false;
 
   constructor(private educationService: EducationService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.getEducations();
+    
     if(this.tokenService.getToken()){
       this.isLogged = true;
     } else {

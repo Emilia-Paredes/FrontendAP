@@ -17,10 +17,10 @@ export class ExperienceService {
   }
 
   public detailExperience(id: number): Observable<Experience> {
-    return this.httpClient.get<Experience>(`${this.apiServerUrl}/editar/${id}`);
+    return this.httpClient.get<Experience>(`${this.apiServerUrl}/buscar/${id}`);
   }
 
-  public saveExperience(experience: Experience): Observable<any> {
+  public addExperience(experience: Experience): Observable<any> {
     return this.httpClient.post<any>(`${this.apiServerUrl}/crear`, experience);
   }
 
