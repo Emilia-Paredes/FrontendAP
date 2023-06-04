@@ -1,28 +1,30 @@
 <div class="container-xxxl" *ngIf="personas">
-  <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
-    data-bs-target="#addPersonModal" (click)="onOpenModal('add')" style="color:aliceblue">
-    <i class="fa fa-pencil"></i>
-  </button>
   <div class="row" *ngFor="let persona of personas">
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 img">
+      <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#updatePersonaModal" (click)="onOpenModal('edit', persona)" style="color:aliceblue; margin: 5px 0px 0px 125px; position: absolute;">
+        <i class="fa fa-pencil"></i>
+      </button>
       <img src="{{persona.url_imagen}}" class="img-fluid">
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2" id="name">
       <h1>{{persona.nombre}}</h1>
       <h4>{{persona.ocupacion}}</h4>
     </div>
-    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 about-me" style="padding: 35px 10px 20px 15px;">
-      <span>
-        <h3>Acerca de mí</h3>
-        <p>{{persona.sobremi}}</p>
-      </span>
-    </div>
+    <div class="row about-me" style="padding: 35px 10px 20px 15px;">
+      <div class="col-sm-10">
+        <span>
+          <h3>Acerca de mí</h3>
+          <p>{{persona.sobremi}}</p>
+        </span>
+      </div>
 
-    <div class="col-sm-2" style="text-align: end;">
-      <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePersonModal"
-        (click)="onOpenModal('edit', persona)" style="color:aliceblue"><i class="fa fa-pencil"></i></button>
-      <button *ngIf="isLogged" (click)="onOpenModal('delete', persona)" class="btn btn-primary tooltips" data-placement="top"
-        data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal" data-bs-target="#deletePersonModal"><i class="fa fa-times"></i></button>
+      <div class="col-sm-2" style="text-align: end;">
+        <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePersonModal"
+          (click)="onOpenModal('edit', persona)" style="color:aliceblue; margin: 10px;"><i class="fa fa-pencil"></i></button>
+        <button *ngIf="isLogged" (click)="onOpenModal('delete', persona)" class="btn btn-primary tooltips" data-placement="top"
+          data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal" data-bs-target="#deletePersonModal"><i class="fa fa-times"></i></button>
+      </div>
     </div>
   </div>
 </div>

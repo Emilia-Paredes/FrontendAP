@@ -6,20 +6,21 @@
     </button>
   </div>
 
-  <div class="contenedor">
-    <div class="col-sm-12 col-md-7 col-lg-7 parte1" *ngFor="let project of projects">
+  <div class="row" *ngFor="let project of projects" style="padding: 20px 0px;">
+    <div class="col-sm-2">
+      <img src="{{project.imageProy}}" class="img-fluid">
+    </div>
+    <div class="col-sm-8">
       <h3>{{project.nombreProy}}</h3>
       <p>{{project.descripcionProy}}</p>
-      <img src="{{project.imageProy}}" class="img-fluid">
-
-      <div class="col-sm-2" style="text-align: end;">
-        <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
-          data-bs-target="#updateProjectModal" (click)="onOpenModal('edit', project)" style="color:aliceblue"><i
-            class="fa fa-pencil"></i></button>
-        <button *ngIf="isLogged" (click)="onOpenModal('delete', project)" class="btn btn-primary tooltips"
-          data-placement="top" data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal"
-          data-bs-target="#deleteProjectModal"><i class="fa fa-times"></i></button>
-      </div>
+    </div>
+    <div class="col-sm-2" style="text-align: end;">
+      <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#updateProjectModal" (click)="onOpenModal('edit', project)" style="color:aliceblue; margin: 10px;"><i
+          class="fa fa-pencil"></i></button>
+      <button *ngIf="isLogged" (click)="onOpenModal('delete', project)" class="btn btn-primary tooltips"
+        data-placement="top" data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal"
+        data-bs-target="#deleteProjectModal"><i class="fa fa-times"></i></button>
     </div>
   </div>
 </div>
@@ -62,8 +63,8 @@
 </div>
 
 <!-- Edit Modal -->
-<div class="modal fade" id="updateProjectModal" tabindex="-1" role="dialog"
-  aria-labelledby="updateProjectModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateProjectModal" tabindex="-1" role="dialog" aria-labelledby="updateProjectModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,8 +104,8 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteProjectModal" tabindex="-1" role="dialog"
-  aria-labelledby="deleteProjectModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="deleteProjectModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

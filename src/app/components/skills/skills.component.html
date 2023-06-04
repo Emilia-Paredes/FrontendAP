@@ -9,6 +9,12 @@
 
   <div style="flex-wrap: wrap; justify-content: center; display: flex;">
     <div *ngFor="let skill of skills">
+      <div class="col-sm-2" style="text-align: end; display: block; position: absolute; margin: 15px 5px 0px 25px;">
+        <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateSkillModal"
+          (click)="onOpenModal('edit', skill)" style="color:aliceblue; margin: 4px;"><i class="fa fa-pencil"></i></button>
+        <button *ngIf="isLogged" (click)="onOpenModal('delete', skill)" class="btn btn-primary tooltips" data-placement="top"
+          data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal" data-bs-target="#deleteSkillModal"><i class="fa fa-times"></i></button>
+      </div>
       <circle-progress
         [percent]="(skill.percentage)"
         [radius]="100" [imageSrc]="''"
@@ -21,12 +27,6 @@
         [animationDuration]="300">
       </circle-progress>
 
-      <div class="col-sm-2" style="text-align: end;">
-        <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateSkillModal"
-          (click)="onOpenModal('edit', skill)" style="color:aliceblue"><i class="fa fa-pencil"></i></button>
-        <button *ngIf="isLogged" (click)="onOpenModal('delete', skill)" class="btn btn-primary tooltips" data-placement="top"
-          data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal" data-bs-target="#deleteSkillModal"><i class="fa fa-times"></i></button>
-      </div>
     </div>
   </div>
 </div>

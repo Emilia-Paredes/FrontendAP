@@ -29,6 +29,6 @@ export class PersonService {
   }
   
   public deletePersona(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiServerUrl}/persona/eliminar/${id}`);
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/eliminar/${id}`);
   }
 }
