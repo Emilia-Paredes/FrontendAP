@@ -24,8 +24,8 @@ export class PersonService {
     return this.httpClient.post<Persona>(`${this.apiServerUrl}/crear`, persona);
   }
   
-  public updatePersona(persona: Persona): Observable<Persona> {
-    return this.httpClient.put<Persona>(`${this.apiServerUrl}/editar`, persona);
+  public updatePersona(id: number, persona: Persona): Observable<Persona> {
+    return this.httpClient.put<Persona>(`${this.apiServerUrl}/editar/${id}`, persona);
   }
   
   public deletePersona(id: number): Observable<void> {

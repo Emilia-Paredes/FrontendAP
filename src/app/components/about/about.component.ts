@@ -4,7 +4,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Persona } from 'src/app/model/person.model';
 import { PersonService } from 'src/app/service/person.service';
 import { TokenService } from 'src/app/service/token.service';
-// import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-about',
@@ -17,19 +16,8 @@ export class AboutComponent implements OnInit {
   public deletePerson: Persona | undefined;
   rol: string[] = [];
   isLogged = false;
-  // isAdmin: boolean = false;
 
   constructor(private personService: PersonService, private tokenService: TokenService) { }
-
-  // ngOnInit(): void {
-  //   this.getPersonas();
-  //   this.rol = this.tokenService.getAuthorities();
-  //   this.rol.forEach(role => {
-  //     if (role === 'ROLE_ADMIN') {
-  //       this.isAdmin = true;
-  //     }
-  //   })
-  // }
 
   ngOnInit(): void {
     this.getPersonas();
@@ -87,7 +75,9 @@ export class AboutComponent implements OnInit {
   }
 
   public onUpdatePerson(persona: Persona): void {
-    this.personService.updatePersona(persona).subscribe({
+    if(!persona.id) return console.log('No existe el ID')
+    let id = persona.id;
+    this.personService.updatePersona(id, persona).subscribe({
       next: (response: Persona) => {
         console.log(response);
         this.getPersonas();

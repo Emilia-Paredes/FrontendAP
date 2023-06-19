@@ -28,7 +28,7 @@ export class EducationService {
     return this.httpClient.put<any>(this.apiServerUrl + `/editar/${id}`, educacion);
   }
 
-  public deleteEducation(educationId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiServerUrl}/eliminar/${educationId}`);
+  public deleteEducation(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/eliminar/${id}`);
   }
 }

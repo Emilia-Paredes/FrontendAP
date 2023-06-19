@@ -1,15 +1,29 @@
 <div class="container-xxxl" *ngIf="personas">
+  <div class="text-center">
+    <button *ngIf="isLogged && !personas.length" type="button" class="btn btn-success" data-bs-toggle="modal"
+      data-bs-target="#addPersonModal" (click)="onOpenModal('add')" style="color:aliceblue"> Agregar Perfil </button>
+  </div>
+
   <div class="row" *ngFor="let persona of personas">
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 img">
-      <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
-        data-bs-target="#updatePersonaModal" (click)="onOpenModal('edit', persona)" style="color:aliceblue; margin: 5px 0px 0px 125px; position: absolute;">
-        <i class="fa fa-pencil"></i>
-      </button>
       <img src="{{persona.url_imagen}}" class="img-fluid">
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2" id="name">
-      <h1>{{persona.nombre}}</h1>
-      <h4>{{persona.ocupacion}}</h4>
+    <div class="col">
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
+        <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#updatePersonaModal" (click)="onOpenModal('edit', persona)"
+          style="color:aliceblue;">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button *ngIf="isLogged" (click)="onOpenModal('delete', persona)" class="btn btn-primary tooltips"
+          data-placement="top" data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal"
+          data-bs-target="#deletePersonModal" style="margin-left: 15px;"><i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2" id="name" style="inline-size: max-content;">
+        <h1>{{persona.nombre}} {{persona.apellido}}</h1>
+        <h4>{{persona.ocupacion}}</h4>
+      </div>
     </div>
     <div class="row about-me" style="padding: 35px 10px 20px 15px;">
       <div class="col-sm-10">
@@ -19,12 +33,12 @@
         </span>
       </div>
 
-      <div class="col-sm-2" style="text-align: end;">
-        <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePersonModal"
-          (click)="onOpenModal('edit', persona)" style="color:aliceblue; margin: 10px;"><i class="fa fa-pencil"></i></button>
+      <!-- <div class="col-sm-2" style="text-align: end;">
+         <button *ngIf="isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePersonModal"
+          (click)="onOpenModal('edit', persona)" style="color:aliceblue; margin: 10px;"><i class="fa fa-pencil"></i></button> 
         <button *ngIf="isLogged" (click)="onOpenModal('delete', persona)" class="btn btn-primary tooltips" data-placement="top"
           data-toggle="tooltip" data-original-title="Delete" data-bs-toggle="modal" data-bs-target="#deletePersonModal"><i class="fa fa-times"></i></button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -42,8 +56,7 @@
         <form #addForm="ngForm" (ngSubmit)="onAddPerson(addForm)">
           <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre"
-              required>
+            <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
           </div>
           <div class="form-group">
             <label for="apellido">Apellido</label>
@@ -52,13 +65,12 @@
           </div>
           <div class="form-group">
             <label for="ocupacion">Ocupación</label>
-            <input type="text" ngModel name="ocupacion" class="form-control" id="ocupacion"
-              placeholder="Ocupación" required>
+            <input type="text" ngModel name="ocupacion" class="form-control" id="ocupacion" placeholder="Ocupación"
+              required>
           </div>
           <div class="form-group">
             <label for="sobremi">Sobre mi</label>
-            <input type="text" ngModel name="sobremi" class="form-control" id="sobremi"
-              placeholder="Sobre mi" required>
+            <input type="text" ngModel name="sobremi" class="form-control" id="sobremi" placeholder="Sobre mi" required>
           </div>
           <div class="form-group">
             <label for="url_imagen">Imagen</label>
@@ -67,7 +79,8 @@
           <div class="modal-footer">
             <button type="button" id="add-persona-form" class="btn btn-secondary"
               data-bs-dismiss="modal">Cerrar</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Añadir cambios</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Añadir
+              cambios</button>
           </div>
         </form>
       </div>
@@ -88,34 +101,35 @@
         <form #editForm="ngForm" (ngSubmit)="onUpdatePerson(editForm.value)">
           <div class="form-group">
             <label for="nombre">Título</label>
-            <input type="text" ngModel="{{updatePerson?.nombre}}" name="nombre" class="form-control"
-              id="nombre" placeholder="Titulo" required>
+            <input type="text" ngModel="{{updatePerson?.nombre}}" name="nombre" class="form-control" id="nombre"
+              placeholder="Titulo" required>
           </div>
           <div class="form-group">
             <label for="apellido">Apellido</label>
-            <input type="text" ngModel="{{updatePerson?.apellido}}" name="apellido" class="form-control"
-              id="apellido" placeholder="Apellido" required>
+            <input type="text" ngModel="{{updatePerson?.apellido}}" name="apellido" class="form-control" id="apellido"
+              placeholder="Apellido" required>
           </div>
           <div class="form-group">
             <label for="ocupacion">Ocupación</label>
-            <input type="text" ngModel="{{updatePerson?.ocupacion}}" name="ocupacion" class="form-control" id="ocupacion"
-              placeholder="Ocupación" required>
+            <input type="text" ngModel="{{updatePerson?.ocupacion}}" name="ocupacion" class="form-control"
+              id="ocupacion" placeholder="Ocupación" required>
           </div>
           <div class="form-group">
             <label for="sobremi">Sobre mi</label>
-            <input type="text" ngModel="{{updatePerson?.sobremi}}" name="sobremi" class="form-control"
-              id="sobremi" placeholder="Sobre mi" required>
+            <input type="text" ngModel="{{updatePerson?.sobremi}}" name="sobremi" class="form-control" id="sobremi"
+              placeholder="Sobre mi" required>
           </div>
           <div class="form-group">
             <label for="url_imagen">Imagen</label>
-            <input type="text" ngModel="{{updatePerson?.url_imagen}}" name="url_imagen" class="form-control" id="url_imagen"
-              placeholder="Imagen">
+            <input type="text" ngModel="{{updatePerson?.url_imagen}}" name="url_imagen" class="form-control"
+              id="url_imagen" placeholder="Imagen">
           </div>
           <div>
             <input type="hidden" name="id" ngModel="{{updatePerson?.id}}">
           </div>
           <div class="modal-footer">
-            <button type="button" id="update-persona-form" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="update-persona-form" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cerrar</button>
             <button (click)="onUpdatePerson(editForm.value)" [disabled]="editForm.invalid" type="submit"
               class="btn btn-primary" data-bs-dismiss="modal">Añadir cambios</button>
           </div>
@@ -141,8 +155,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal">No</button>
-        <button (click)="deletePerson && deletePerson.id !== undefined && onDeletePerson(deletePerson.id)"
-          type="button" class="btn" data-bs-dismiss="modal">Sí</button>
+        <button (click)="deletePerson && deletePerson.id !== undefined && onDeletePerson(deletePerson.id)" type="button"
+          class="btn" data-bs-dismiss="modal">Sí</button>
       </div>
     </div>
   </div>
